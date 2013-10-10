@@ -1,0 +1,11 @@
+## Pig Latin Function 
+```{r}
+pigLatinRule <- function(word) {
+if (grep(_pattern_, word)) {
+  res <- _corresponding string value_
+  } else {
+    res <- _another string value
+    }
+return ( res )
+}
+``` 
