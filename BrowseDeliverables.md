@@ -19,7 +19,12 @@ IMG.thumbpage {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    border-style: outset}
+    border-style: outset
+    }
+span.border {
+border: thick solid #CCCCCC;
+}
+</style>
 </style>
 
 Written for BrowseDeliverables **v0.1**.
@@ -31,6 +36,23 @@ The links let you view your files as they appear on GitHub.  To edit and update 
 > compile -> stage -> commit -> push.
 
 .....................
+
+## Reading *Huck Finn*
+
+This is a multi-step project.
+
+* [Overall goal](InteractiveHuckFinn.html)
+
+### Subdeliverable I
+
+Write an Rmd file that compiles a vector of words into HTML text, highlighting the individual words and giving a <span class="border" title="like this tooltip">tooltip</span> for each word.
+
+* [Assignment](http://dtkaplan.github.io/ScientificComputing/Assignments/ToolTips.html).  
+* Repository Path: <code>HuckFinn/ToolTips.[html | Rmd]</code>
+* Your Files: [view HTML](http://jhargens.github.io/CS121-Work/HuckFinn/ToolTips.html); [raw Rmd](http://jhargens.github.io/CS121-Work/HuckFinn/ToolTips.Rmd) 
+
+<a href='http://jhargens.github.io/CS121-Work/HuckFinn/ToolTips.html'><img class='thumbpage' src='http://img.bitpixels.com/getthumbnail?code=75555&url=jhargens.github.io/CS121-Work/HuckFinn/ToolTips.html&size=200'></a>
+
 
 ## Recursion
 
