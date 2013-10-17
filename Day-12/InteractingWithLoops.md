@@ -1,0 +1,74 @@
+# Interacting with Loops
+
+## Looping a Launch 
+
+```r
+blastoffWhile <- function(time) {
+    while (time != 0) {
+        Sys.sleep(1)
+        cat(time, "")
+        time <- time - 1
+    }
+    Sys.sleep(1)
+    cat("Blastoff!")
+}
+```
+
+
+```r
+blastoffWhile(5)
+```
+
+```
+## 5 4 3 2 1 Blastoff!
+```
+
+
+
+```r
+countdown <- function(time) {
+    for (k in time:1) {
+        startime <- Sys.time()
+        system(paste("say", k))
+        now <- Sys.time()
+        Sys.sleep(1 - as.numeric(now - startime))
+    }
+    system("Blastoff!")
+}
+```
+
+
+
+## Testing Human Response Times
+
+```r
+getData <- function(N) {
+    readline("Ready? (press return)")
+    for (k in 1:N) {
+        before <- Sys.time()
+        readline("Press Return:")  # this is called 'Blocking'
+        after <- Sys.time()
+        delay <- as.numeric(after - before)
+        cat(rep("", 20))
+        result <- delay
+        Sys.sleep(runif(1, min = 1, max = 5))
+    }
+    return(result)
+}
+```
+
+
+
+```r
+load("JamesData.RData")
+```
+
+```
+## Warning: cannot open compressed file 'JamesData.RData', probable reason
+## 'No such file or directory'
+```
+
+```
+## Error: cannot open the connection
+```
+
