@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>Blank &ldquo;Canvasas&rdquo; Circles and Squares</title>
+<title>Derivatives as Finite Differences</title>
 
 <style type="text/css">
 body, td {
@@ -178,41 +178,33 @@ hljs.initHighlightingOnLoad();
 </head>
 
 <body>
-<h2>Blank &ldquo;Canvasas&rdquo; Circles and Squares</h2>
+<h2>Derivatives as Finite Differences</h2>
 
-<h1></h1>
+<h3>Evaluate Derivative</h3>
 
-<p>Establishes the Canvas for the Graphics </p>
-
-<pre><code class="r">canvas &lt;- function(mn = 0, mx = 100) {
-    plot(1:2, ylim = c(mn, mx), xlim = c(mn, mx), asp = 1, xaxt = &quot;n&quot;, yaxt = &quot;n&quot;, 
-        type = &quot;n&quot;, bty = &quot;n&quot;, xlab = &quot;&quot;, ylab = &quot;&quot;)
-}
-circle &lt;- function(x, y, r, ry = r, ...) {
-    angs &lt;- seq(0, 2 * pi, length = 200)
-    xpts &lt;- x + r * cos(angs)
-    ypts &lt;- y + ry * sin(angs)
-    polygon(xpts, ypts, ...)
+<pre><code class="r">evalD &lt;- function(f, x) {
+    h &lt;- 1e-08  #&#39;small h&#39;
+    return((f(x + h) - f(x - h))/(2 * h))
 }
 </code></pre>
 
-<pre><code class="r">canvas()
-circle(50, 50, 20, col = &quot;blue&quot;, border = NULL)
-circle(35, 70, r = 20, ry = 30, col = scales::alpha(&quot;pink&quot;, 0.4), border = NULL)
+<h3>In Class &amp; First Order Derivative</h3>
+
+<pre><code class="r">myD &lt;- function(f, h = 1e-07) {
+    fprime &lt;- function(x) {
+        (f(x + h) - f(x))/h
+    }
+    return(fprime)
+}
 </code></pre>
 
-<pre><code>## Error: there is no package called &#39;scales&#39;
-</code></pre>
+<h3>Second &amp; Higher Order Derivative</h3>
 
-<pre><code class="r">polygon(c(20, 40, 40, 20), c(40, 40, 60, 60), col = &quot;green&quot;, border = &quot;blue&quot;, 
-    lwd = 5)
-polygon(c(38, 48, 48, 38), c(33, 33, 23, 23), col = &quot;red&quot;, border = &quot;black&quot;)
-polygon(c(67, 60, 75, 90, 83), c(45, 60, 72, 60, 45), col = &quot;yellow&quot;, border = NULL)
-</code></pre>
-
-<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-2"/> </p>
-
-<pre><code class="r">
+<pre><code class="r">myD2 &lt;- function(f, h = 1e-09) {
+    fprime &lt;- myD(f, h = h)
+    eprime &lt;- myD(fprime, h = h)
+    return(eprime)
+}
 </code></pre>
 
 </body>
