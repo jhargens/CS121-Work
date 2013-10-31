@@ -44,6 +44,7 @@ dim(puppy)
 require(png)
 require(RCurl)
 COMP121::canvas(x = c(1, 220), y = c(1, 220), asp = 1)
+graphics::rasterImage(puppy, 1, 1, 216, 198)
 ```
 
 ![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2.png) 
