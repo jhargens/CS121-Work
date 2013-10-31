@@ -1,49 +1,66 @@
 ## Numbers and Strings 
 
-### Help for Crossworld Puzzles
+### Basic Statistics 
+
+### Numbers and Languages 
 
 ```r
-words <- readLines(url("http://dtkaplan.github.io/ScientificComputing/Syllabus/Daily/Day-07/word_list_moby_crossword-flat/word_list_moby_crossword.flat.txt"))
-
-findscrable <- function(letters) {
-    for (k in 1:length(letters)) {
-        words <- words[grep(letters[k], words)]
-        if (length(words) < 10) 
-            break
-    }
-    return(words)
+EnglishNumbers <- c("zero", "one", "two", "three", "four", "five", "six", "seven", 
+    "eight", "nine")
+digitToWord <- function(n, language) {
+    return(language[n + 1])
 }
+digitToWord(4, EnglishNumbers)
 ```
 
+```
+## [1] "four"
+```
 
+### Help for Crossword Puzzles 
 
 ```r
-summary(cars)
+lettersMatch <- function(words, pattern) {
+    words <- readLines(url("http://dtkaplan.github.io/ScientificComputing/Syllabus/Daily/Day-07/word_list_moby_crossword-flat/word_list_moby_crossword.flat.txt"))
+    analyze <- grepl(pattern, words)
+    return(words[analyze])
+}
+# 8 letter words starting with 'h' ending in 'ed'
+lettersMatch(words, "^h.....ed")
 ```
 
 ```
-## Warning: closing unused connection 5
-## (http://dtkaplan.github.io/ScientificComputing/Syllabus/Daily/Day-07/word_list_moby_crossword-flat/word_list_moby_crossword.flat.txt)
+##  [1] "hachured"  "halloaed"  "hallooed"  "hallowed"  "haltered" 
+##  [6] "hammered"  "hampered"  "hangared"  "hankered"  "hanseled" 
+## [11] "happened"  "harassed"  "harbored"  "hardened"  "harkened" 
+## [16] "harrowed"  "hastened"  "haunched"  "havocked"  "hawkweed" 
+## [21] "hawkweeds" "hazarded"  "hectored"  "heehawed"  "helmeted" 
+## [26] "hempseed"  "hempseeds" "hempweed"  "hempweeds" "heralded" 
+## [31] "heroized"  "hiccuped"  "highbred"  "hijacked"  "hilloaed" 
+## [36] "hindered"  "hirseled"  "hocussed"  "hoidened"  "hollered" 
+## [41] "holloaed"  "hollooed"  "hollowed"  "homebred"  "homebreds"
+## [46] "honoured"  "hoodooed"  "hoorahed"  "hoorayed"  "hosteled" 
+## [51] "houseled"  "hovelled"  "hoydened"  "hulloaed"  "humified" 
+## [56] "humoured"  "hungered"  "hunkered"  "hurrahed"  "hurrayed" 
+## [61] "huzzahed"  "hydrated"  "hyphened"
 ```
 
-```
-##      speed           dist    
-##  Min.   : 4.0   Min.   :  2  
-##  1st Qu.:12.0   1st Qu.: 26  
-##  Median :15.0   Median : 36  
-##  Mean   :15.4   Mean   : 43  
-##  3rd Qu.:19.0   3rd Qu.: 56  
-##  Max.   :25.0   Max.   :120
-```
 
-
-You can also embed plots, for example:
-
+### Have Your Pie Two Ways
 
 ```r
-plot(cars)
+piSeries <- function(n) {
+    state <- 0
+    for (k in 1:(length(n))) {
+        result <- ((-1)^(k + 1))/(2 * k - 1)
+        state <- state + result
+    }
+    return(state * 4)
+}
+piSeries(1:10000)
 ```
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3.png) 
-
+```
+## [1] 3.141
+```
 

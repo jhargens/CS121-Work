@@ -1,17 +1,35 @@
 ## Numbers and Strings 
-========================================================
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring web pages (click the **MD** toolbar button for help on Markdown).
+### Basic Statistics 
 
-When you click the **Knit HTML** button a web page will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
+### Numbers and Languages 
 ```{r}
-summary(cars)
+EnglishNumbers <- c("zero","one","two","three","four","five","six","seven","eight","nine")
+digitToWord <- function(n,language){
+     return(language[n+1])
+ }
+digitToWord(4,EnglishNumbers)
 ```
+### Help for Crossword Puzzles 
+```{r}
+lettersMatch <- function(words,pattern){
+  words <- readLines(url("http://dtkaplan.github.io/ScientificComputing/Syllabus/Daily/Day-07/word_list_moby_crossword-flat/word_list_moby_crossword.flat.txt"))
+  analyze <- grepl(pattern,words)
+  return(words[analyze])
+}
+# 8 letter words starting with "h" ending in "ed"
+lettersMatch(words,"^h.....ed")
+``` 
 
-You can also embed plots, for example:
-
-```{r fig.width=7, fig.height=6}
-plot(cars)
+### Have Your Pie Two Ways
+```{r}
+piSeries <- function(n){
+  state <- 0
+  for(k in 1:(length(n))){
+    result <- ((-1)^(k+1))/(2*k-1)
+    state <- state + result
+  }
+  return(state*4)
+}
+piSeries(1:10000)
 ```
-
