@@ -17,10 +17,24 @@ dim(puppy)
 ```{r}
 require(png)
 require(RCurl)
+puppyface <- puppy[1:120,85:215,]
 COMP121::canvas(x= c(1,220), y = c(1,220), asp = 1)
-puppy[100:110, 50:70,]
+graphics::rasterImage(puppyface,1,1,215,120)
 ```
 
 #### Mindo's Left Front Paw
-
+```{r}
+require(png)
+require(RCurl)
+puppypaw <- puppy[80:140,1:50,]
+COMP121::canvas(x= c(1,220), y = c(1,220), asp = 1)
+graphics::rasterImage(puppypaw, 1, 1, 50, 140)
+```
 #### Mindo's Dog Tag
+```{r}
+require(png)
+require(RCurl)
+puppytag <- puppy[120:145,95:140,]
+COMP121::canvas(x= c(1,220), y = c(1,220), asp = 1)
+graphics::rasterImage(puppytag, 1, 1, 140, 145)
+```
