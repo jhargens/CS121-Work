@@ -4,9 +4,9 @@
 
 ```{r}
 reverse<-function(x){
-  L <- strsplit(x,"")[[1]]
+  L <- strsplit(x,NULL)
   R <- rev(L[[1]])
-  paste(R, collapse="")
+  return(paste(R, collapse=""))
 }
 ```
 
@@ -14,3 +14,106 @@ Test Statement:
 ```{r}
 reverse("hello")
 ```  
+
+### Scrambler 
+```{r}
+scramble <- function(x){
+  L <- strsplit(x,NULL)
+  R <- sample(L[[1]])
+  return(paste(R, collapse=""))
+  }
+```
+Test Statement:
+```{r}
+scramble("Robert")
+```
+### Vowel Bleeper
+```{r}
+vowelbleeper <-function(x){
+  gsub("[AEIOUaeiou]","*",x)
+  }
+```
+Test Statement:
+```{r}
+vowelbleeper("James Hargens")
+```
+### L33t
+```{r}
+L33t<-function(x){
+  First <- gsub("[Ee]","3",x)
+  Second <- gsub("[Aa]","4",First)
+  Third <- gsub("[Oo]","0",Second)
+  Fourth <- gsub("[Ll]","1",Third)
+  gsub("[Ss]","5",Fourth)
+  }
+```
+Test Statement:
+```{r}
+L33t("Soccer is the best sport in the world")
+```
+## Sets of Words
+```{r}
+# Reverser
+Reverse<-function(x){
+reverse<-function(x){
+  L <- strsplit(x,NULL)
+  R <- rev(L[[1]])
+  return(paste(R, collapse=""))
+}
+sapply(x,reverse)
+}
+```
+Test Statement:
+```{r}
+Reverse(c("hello", "world"))
+```
+```{r}
+#Scrambler
+Scramble <- function(x){
+scramble <- function(x){
+  L <- strsplit(x,NULL)
+  R <- sample(L[[1]])
+  return(paste(R, collapse=""))
+  }
+sapply(x,scramble)
+}
+```
+Test Statment:
+```{r}
+Scramble(c("hello","world"))
+```
+```{r}
+#Vowel Bleeper
+Vowelbleeper <- function(x){
+vowelbleeper <-function(x){
+  gsub("[AEIOUaeiou]","*",x)
+  }
+sapply(x,vowelbleeper)
+}
+```
+Test Statment:
+```{r}
+Vowelbleeper(c("hello","world"))
+```
+```{r}
+#L33t
+l33t<-function(x){
+L33t<-function(x){
+  First <- gsub("[Ee]","3",x)
+  Second <- gsub("[Aa]","4",First)
+  Third <- gsub("[Oo]","0",Second)
+  Fourth <- gsub("[Ll]","1",Third)
+  gsub("[Ss]","5",Fourth)
+  }
+sapply(x,L33t)
+}
+```
+Test Statement:
+```{r}
+l33t(c("hello","world"))
+```
+
+
+
+
+

@@ -183,9 +183,9 @@ hljs.initHighlightingOnLoad();
 <h3>Reverser</h3>
 
 <pre><code class="r">reverse &lt;- function(x) {
-    L &lt;- strsplit(x, &quot;&quot;)[[1]]
+    L &lt;- strsplit(x, NULL)
     R &lt;- rev(L[[1]])
-    paste(R, collapse = &quot;&quot;)
+    return(paste(R, collapse = &quot;&quot;))
 }
 </code></pre>
 
@@ -194,7 +194,140 @@ hljs.initHighlightingOnLoad();
 <pre><code class="r">reverse(&quot;hello&quot;)
 </code></pre>
 
-<pre><code>## [1] &quot;h&quot;
+<pre><code>## [1] &quot;olleh&quot;
+</code></pre>
+
+<h3>Scrambler</h3>
+
+<pre><code class="r">scramble &lt;- function(x) {
+    L &lt;- strsplit(x, NULL)
+    R &lt;- sample(L[[1]])
+    return(paste(R, collapse = &quot;&quot;))
+}
+</code></pre>
+
+<p>Test Statement:</p>
+
+<pre><code class="r">scramble(&quot;Robert&quot;)
+</code></pre>
+
+<pre><code>## [1] &quot;rRtebo&quot;
+</code></pre>
+
+<h3>Vowel Bleeper</h3>
+
+<pre><code class="r">vowelbleeper &lt;- function(x) {
+    gsub(&quot;[AEIOUaeiou]&quot;, &quot;*&quot;, x)
+}
+</code></pre>
+
+<p>Test Statement:</p>
+
+<pre><code class="r">vowelbleeper(&quot;James Hargens&quot;)
+</code></pre>
+
+<pre><code>## [1] &quot;J*m*s H*rg*ns&quot;
+</code></pre>
+
+<h3>L33t</h3>
+
+<pre><code class="r">L33t &lt;- function(x) {
+    First &lt;- gsub(&quot;[Ee]&quot;, &quot;3&quot;, x)
+    Second &lt;- gsub(&quot;[Aa]&quot;, &quot;4&quot;, First)
+    Third &lt;- gsub(&quot;[Oo]&quot;, &quot;0&quot;, Second)
+    Fourth &lt;- gsub(&quot;[Ll]&quot;, &quot;1&quot;, Third)
+    gsub(&quot;[Ss]&quot;, &quot;5&quot;, Fourth)
+}
+</code></pre>
+
+<p>Test Statement:</p>
+
+<pre><code class="r">L33t(&quot;Soccer is the best sport in the world&quot;)
+</code></pre>
+
+<pre><code>## [1] &quot;50cc3r i5 th3 b35t 5p0rt in th3 w0r1d&quot;
+</code></pre>
+
+<h2>Sets of Words</h2>
+
+<pre><code class="r"># Reverser
+Reverse &lt;- function(x) {
+    reverse &lt;- function(x) {
+        L &lt;- strsplit(x, NULL)
+        R &lt;- rev(L[[1]])
+        return(paste(R, collapse = &quot;&quot;))
+    }
+    sapply(x, reverse)
+}
+</code></pre>
+
+<p>Test Statement:</p>
+
+<pre><code class="r">Reverse(c(&quot;hello&quot;, &quot;world&quot;))
+</code></pre>
+
+<pre><code>##   hello   world 
+## &quot;olleh&quot; &quot;dlrow&quot;
+</code></pre>
+
+<pre><code class="r"># Scrambler
+Scramble &lt;- function(x) {
+    scramble &lt;- function(x) {
+        L &lt;- strsplit(x, NULL)
+        R &lt;- sample(L[[1]])
+        return(paste(R, collapse = &quot;&quot;))
+    }
+    sapply(x, scramble)
+}
+</code></pre>
+
+<p>Test Statment:</p>
+
+<pre><code class="r">Scramble(c(&quot;hello&quot;, &quot;world&quot;))
+</code></pre>
+
+<pre><code>##   hello   world 
+## &quot;lhloe&quot; &quot;wrdlo&quot;
+</code></pre>
+
+<pre><code class="r"># Vowel Bleeper
+Vowelbleeper &lt;- function(x) {
+    vowelbleeper &lt;- function(x) {
+        gsub(&quot;[AEIOUaeiou]&quot;, &quot;*&quot;, x)
+    }
+    sapply(x, vowelbleeper)
+}
+</code></pre>
+
+<p>Test Statment:</p>
+
+<pre><code class="r">Vowelbleeper(c(&quot;hello&quot;, &quot;world&quot;))
+</code></pre>
+
+<pre><code>##   hello   world 
+## &quot;h*ll*&quot; &quot;w*rld&quot;
+</code></pre>
+
+<pre><code class="r"># L33t
+l33t &lt;- function(x) {
+    L33t &lt;- function(x) {
+        First &lt;- gsub(&quot;[Ee]&quot;, &quot;3&quot;, x)
+        Second &lt;- gsub(&quot;[Aa]&quot;, &quot;4&quot;, First)
+        Third &lt;- gsub(&quot;[Oo]&quot;, &quot;0&quot;, Second)
+        Fourth &lt;- gsub(&quot;[Ll]&quot;, &quot;1&quot;, Third)
+        gsub(&quot;[Ss]&quot;, &quot;5&quot;, Fourth)
+    }
+    sapply(x, L33t)
+}
+</code></pre>
+
+<p>Test Statement:</p>
+
+<pre><code class="r">l33t(c(&quot;hello&quot;, &quot;world&quot;))
+</code></pre>
+
+<pre><code>##   hello   world 
+## &quot;h3110&quot; &quot;w0r1d&quot;
 </code></pre>
 
 </body>
