@@ -214,13 +214,14 @@ hljs.initHighlightingOnLoad();
 
 <pre><code class="r">getData &lt;- function(N) {
     readline(&quot;Ready? (press return)&quot;)
+    result = numeric(N)
     for (k in 1:N) {
         before &lt;- Sys.time()
         readline(&quot;Press Return:&quot;)  # this is called &#39;Blocking&#39;
         after &lt;- Sys.time()
         delay &lt;- as.numeric(after - before)
         cat(rep(&quot;&quot;, 20))
-        result &lt;- delay
+        result[k] &lt;- delay
         Sys.sleep(runif(1, min = 1, max = 5))
     }
     return(result)
