@@ -1,0 +1,19 @@
+## Using Data in R Notes
+```{r}
+require(mosaic)
+require(DCF)
+data(package = "DCF")
+```
+#### Operations for use in data frames 
+1. names()
+2. nrow()
+3. ncol()
+4. with()
+5. $ (#will specify a certain element of data in the data frame)
+
+### Task (how to return diabetes (diab) in patients, red if yes, blue if no)
+```{r}
+diacolors <- with(small, ifelse(diab==0, alpha("blue",.2),alpha("red",.4)))
+```
+
+xyplot( wgt~hgt, data=small,group=sex, main="", auto.key=list(space="right"))

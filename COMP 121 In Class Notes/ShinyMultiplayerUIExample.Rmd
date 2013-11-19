@@ -1,0 +1,14 @@
+## Shiney Multiplayer UI Example
+
+### Need Different Components 
+### 1. Login (Log)
+```{r}
+require(manipulate)
+require(shiny)
+require(manipulate)
+require(shiny)
+
+```
+### 2. Instructor (In)
+### 3. Likelihood (Lik)
+### 4. Evaluation (Ev)

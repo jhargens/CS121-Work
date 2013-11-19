@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>Writing Functions Exercise </title>
+<title>An Example Shiny App</title>
 
 <style type="text/css">
 body, td {
@@ -178,125 +178,142 @@ hljs.initHighlightingOnLoad();
 </head>
 
 <body>
-<h1>Writing Functions Exercise </h1>
+<h1>An Example Shiny App</h1>
 
-<h2>Sums of Numbers</h2>
+<h2>The basic plot for display.</h2>
+
+<p>The inputs to the whole picture are given as arguments to the function.</p>
+
+<pre><code class="r">drawDistribution &lt;- function(fun=dbeta,param1=1,param2=.5,xlim=c(0,1),xdata=NULL){
+  x &lt;- seq(xlim[1],xlim[2],length=200)
+  y &lt;- fun(x, param1,param2)
+  # Get rid of points not in the domain of the distribution
+  keep &lt;- is.finite(y)
+  y &lt;- y[keep]
+  x &lt;- x[keep]
+  plot(x,y,type=&#39;l&#39;,xlim=xlim,lwd=2,col=&quot;red&quot;,ylim=c(0,max(y)),
+       ylab=&quot;Probability Density&quot;, xlab=&quot;x&quot;, bty=&quot;n&quot;)
+  if (!is.null(xdata)) {
+    points( xdata, rep(0,length(xdata) ), 
+            pch=20, col=rgb(0,0,0,.1) )
+    dens &lt;- density(xdata)
+    lines( dens$x, dens$y )
+    }
+  }
+</code></pre>
+
+<pre><code class="r">drawDistribution(dnorm,.5,1.5,xdata=runif(100),xlim=c(0,2))
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-3"/> </p>
+
+<h2>A User Interface</h2>
+
+<p>This will be given as an argument to <code>bootstrapPage()</code>.  This is not a function. These contents are entirely static.  They are run once and define the slots and widgets for the user interface.</p>
+
+<p>You will also name the addressable elements here.  Make sure to name them in a way that doesn&#39;t conflict with other components of the UI that other people are developing.</p>
+
+<p>Assume the stem of the name, unique to your part of the project, is <code>dist</code>, short for distribution.</p>
+
+<pre><code class="r">myUI &lt;- div(
+  div(class=&#39;jumbotron masthead&#39;,
+      h3(&#39;The ß Distribution&#39;),
+      p(&#39;Showing the shape of the ß distribution.&#39; ),
+      actionButton(inputId=&quot;submitted&quot;,&quot;Send in your parameters.&quot;)
+  ),
+  div(class=&#39;row span9 well&#39;,
+    div(class=&#39;span3 well&#39;,
+        selectInput(&quot;distDistrib&quot;,&quot;Choice of Distribution&quot;, 
+                    list(uniform=&quot;uniform&quot;,gaussian=&quot;normal&quot;,
+                         beta=&quot;beta&quot;, &quot;chi squared&quot; =&quot;chisq&quot;), 
+                    selected=&quot;beta&quot;),
+        sliderInput(&quot;distParam1&quot;, &quot;Parameter 1&quot;, min=0.01,max=2,step=0.01, value=0.5),
+        sliderInput(&quot;distParam2&quot;, &quot;Parameter 2&quot;, min=0.01,max=2,step=0.01, value=0.1)
+        ),
+    div(class=&#39;span4 well&#39;,
+        plotOutput(&quot;distPlot1&quot;),
+        sliderInput(&quot;distXrange&quot;, &quot;X-axis Range&quot;, 
+                    min=-10, max=10, step=0.5, value=c(0,1))
+    )
+  )
+)
+</code></pre>
+
+<p>A utility function to give the parameter names and other features for each distribution.</p>
+
+<pre><code class="r">paramNames &lt;- function(name){
+  res &lt;- switch(EXPR=name,
+         uniform=list(distParam1=&#39;min&#39;,distParam2=&quot;max&quot;,
+                      domain=c(-Inf,Inf),
+                      fun=function(x,param1,param2){
+                        if( param1 &gt;= param2 ) stop(&quot;Max must be larger than min&quot;)
+                        dunif(x,min=param1,max=param2)}),
+         normal=list(distParam1=&#39;mean&#39;,distParam2=&quot;sd&quot;,
+                     domain=c(-Inf,Inf),
+                     fun=function(x,param1,param2){
+                       dnorm(x,mean=param1,sd=param2)}),
+         beta=list(distParam1=&#39;a&#39;,distParam2=&quot;b&quot;,
+                   domain=c(0.001,.999),
+                   fun=function(x,param1,param2){
+                     dbeta(x,shape1=param1,shape2=param2)}),
+         chisq=list(distParam1=&#39;df&#39;, distParam2=&#39;-- not used --&#39;,
+                    domain=c(0,Inf),
+                    fun=function(x, param1,param2){
+                      dchisq(x,df=param1)})
+         )
+  return(res)
+}
+</code></pre>
+
+<h2>Outside Data</h2>
+
+<p>Since we will be building a team app, it can help to use outside data.  For development purposes, just create a global variable.</p>
+
+<pre><code class="r">outsideData &lt;- rbeta(40, shape1=0.2, shape2=1.5)
+</code></pre>
+
+<h2>Defining the server</h2>
+
+<p>This server is going to do two things:</p>
 
 <ol>
-<li>Counting Odds</li>
+<li>Draw the plot according to the selected distribution.</li>
+<li>Change the slider labels to reflect the selected distribution.</li>
 </ol>
 
-<pre><code class="r">countOdds &lt;- function(x) {
-    +x%%2
-    +sum(x%%2)
+<pre><code class="r">myServer &lt;- function(input,output,session){
+  # Information that&#39;s expensive to calculate or that
+  # more than one function needs can be 
+  # stored in a reactive expression.
+  distInfo &lt;- reactive( paramNames(input$distDistrib) )
+
+  # Send something new to the plot
+  output$distPlot1 &lt;- renderPlot({
+    info &lt;- distInfo()
+    drawDistribution(fun=info$fun,
+                     param1=input$distParam1, param2=input$distParam2, 
+                     xdata=outsideData, xlim=input$distXrange )
+    })
+  # Change the slider names
+  observe( {
+    input$distDistrib # creates the dependancy
+    nms &lt;- distInfo()
+    updateSliderInput(session, inputId=&#39;distParam1&#39;,
+                      label=nms[[&#39;distParam1&#39;]])
+    updateSliderInput(session, inputId=&#39;distParam2&#39;,
+                      label=nms[[&#39;distParam2&#39;]] )                    
+
+    })
 }
 </code></pre>
 
-<ol>
-<li>Counting Evens</li>
-</ol>
+<h2>Displaying the App</h2>
 
-<pre><code class="r">countEvens &lt;- function(x) {
-    +(x + 1)%%2
-    +sum(c((x + 1)%%2))
-}
+<p>To run the app, you will have to run all the chunks above, then run this chunk each time you want to start the app anew.</p>
+
+<pre><code class="r">runApp(list(ui = bootstrapPage(myUI), 
+            server = myServer))
 </code></pre>
-
-<h2>Triangles</h2>
-
-<ol>
-<li>Finding the Hypotenuse</li>
-</ol>
-
-<pre><code class="r">hypotenuselength &lt;- function(a, b) {
-    +(a^2)
-    +(b^2)
-    +sum(a^2, b^2)
-    +sqrt(sum(a^2, b^2))
-}
-</code></pre>
-
-<ol>
-<li>Law of Cosines </li>
-</ol>
-
-<pre><code class="r">lawofcosines &lt;- function(a, b, theta) {
-    +return(sqrt(a^2 + b^2 - 2 * a * b * cos(theta)))
-}
-</code></pre>
-
-<ol>
-<li>Length from Theta</li>
-</ol>
-
-<pre><code class="r">thetaFromLengths &lt;- function(a, b, c) {
-    acos((c^2 - a^2 - b^2)/(-2 * a * b))
-}
-</code></pre>
-
-<p>Test Statement:</p>
-
-<pre><code class="r">thetaFromLengths(1, 2, 3)
-</code></pre>
-
-<pre><code>## [1] 3.142
-</code></pre>
-
-<ol>
-<li>Theta from Lengths Test</li>
-</ol>
-
-<pre><code class="r">thetaFromLengthsTest &lt;- function(a, b, theta) {
-    thetaFromLengths(a, b, lawofcosines(a, b, theta)) - theta
-}
-</code></pre>
-
-<p>Test Statement: </p>
-
-<pre><code class="r">thetaFromLengthsTest(13, 84, 0)
-</code></pre>
-
-<pre><code>## [1] 0
-</code></pre>
-
-<h2>Graphics</h2>
-
-<ol>
-<li></li>
-</ol>
-
-<pre><code class="r">canvas &lt;- function(mn = 0, mx = 100) {
-    plot(1:2, ylim = c(mn, mx), xlim = c(mn, mx), asp = 1, xaxt = &quot;n&quot;, yaxt = &quot;n&quot;, 
-        type = &quot;n&quot;, bty = &quot;n&quot;, xlab = &quot;&quot;, ylab = &quot;&quot;)
-}
-
-circle &lt;- function(x, y, r, ...) {
-    angs &lt;- seq(0, 2 * pi, length = 100)
-    xpts &lt;- x + r * cos(angs)
-    ypts &lt;- y + r * sin(angs)
-    polygon(xpts, ypts, ...)
-}
-</code></pre>
-
-<p>Here&#39;s my graph:</p>
-
-<pre><code class="r">canvas()
-circle(50, 50, 20, col = rgb(1, 0, 0, 0.2))
-</code></pre>
-
-<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAAADFBMVEX9/v0AAAD9y8r9/v0L2uxRAAAABHRSTlP///8AQCqp9AAAAAlwSFlzAAALEgAACxIB0t1+/AAABn1JREFUeJzt3VFu4MYRQEHLuv+dAzmxgSAbQFyRM5x+9U7QRKEb/Js/PpXsj90DaE/go4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPBj4a+Gjgo4GPFof/+GW7p1pRGP6L+M9fVvCPwv9/9P/y3z3mgwXhv4X+z+rvnvapcvDfRh9uH4O/yv4f+91jP1AK/rfYh9KH4H+bfSR9Bv5H7APpK/A/ZR9H34D/8brPo0/A38Q+ij4Af9e6z6KfD38v+1/0uz/pjsbD3+8+Q344/M1nfpD8bPhn2EfIj4Z/zH3AL95k+Afd/zx+6QfDP+t+uvxc+KfdD5cfC/+8+9nyU+FXuB8tPxR+jfvJ8jPhV7kfLA8e/JzWuZ8rPxF+pTv497TU/Vj5efCL3U+VHwe/3P1QefBR+WnwO9zBv6At8CfKD4Pf4w5+e5vgD5SfBb/LHfzmtsGfJz8Kfp87+K1thD9OfhL8TnfwG9sKf5r8IPi97uC3tRn+MPk58LvdwW8K/KXAR+XHwO93B78l8NcCD/7sXgB/lPwU+De4g98Q+IuBvzHw63sF/EnyQ+Df4Q5+eeCvBv7OwK/uJfAHyYO/NfBre4s7+MWBvxz4WwO/ttfAnyMP/t7ALw385cDfG/ilgb8c+HsDvzTwlwN/b+CXBv5y4O8N/NLAXw78vYFf2mvgj3EHf2/g1wb+cjPgXyMPfnEvgT/HHfytgV8d+KsNgX+JPPjlgb8Y+Bs7yB38nYHf0BvkwW8I/LXAN93Bgz888NcaA/8CefBb2g5/lDt48Me3Wx78pjxGdKVB8J4fuxL4pvsoeE+MXgh8030WvGfEvx/4pvsw+G3y4De3Cf4892nwm+TB72+H/IHu4KPu8+DXyx/pPhB+uTz4l7QY/kz3ifBr5Q91Hwm/VB78m1onf6r7UPh18uBf1iL5Y93Hwq+RP9d9LvwK+YPdB8M/L3+y+2T4p+WPdh8N/6z82e6z4R+U/zjcfTj8Y/Kns4+Hf0j+fPfx8E/IH3/mvxoPf7/8BPYC/OfHrfQj1v0zAX/r0g9hj8DftvRT1v2zAn/P0g9i78D/fOlHsYfgf0g/jD0F/wP6cewx+C/637AfyJ6D//zL/gr+x0j2IvxX36T/mKr+WYX/xs2fjP5VFf7z3zf/13d/OvpXYfi/+/ifdk+0IvDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEcDHw18NPDRwEf7F2SRZSGh0pDLAAAAAElFTkSuQmCC" alt="plot of chunk unnamed-chunk-10"/> </p>
-
-<p>Olympic Rings:</p>
-
-<pre><code class="r">canvas()
-circle(10, 60, 10, col = scales::alpha(&quot;white&quot;, 0.1), border = &quot;blue&quot;, lwd = 8)
-circle(20, 50, 10, col = scales::alpha(&quot;white&quot;, 0.1), border = &quot;yellow&quot;, lwd = 8)
-circle(30, 60, 10, col = scales::alpha(&quot;white&quot;, 0.1), border = &quot;black&quot;, lwd = 8)
-circle(40, 50, 10, col = scales::alpha(&quot;white&quot;, 0.1), border = &quot;green&quot;, lwd = 8)
-circle(50, 60, 10, col = scales::alpha(&quot;white&quot;, 0.1), border = &quot;red&quot;, lwd = 8)
-</code></pre>
-
-<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-11"/> </p>
 
 </body>
 

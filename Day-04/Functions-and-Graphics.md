@@ -121,16 +121,11 @@ Olympic Rings:
 
 ```r
 canvas()
-circle(10, 60, 10, col = "blue", border = NULL)
-circle(10, 60, 8, col = "white", border = NULL)
-circle(20, 50, 10, col = "yellow", border = NULL)
-circle(20, 50, 8, col = "white", border = NULL)
-circle(30, 60, 10, col = "black", border = NULL)
-circle(30, 60, 8, col = "white", border = NULL)
-circle(40, 50, 10, col = "green", border = NULL)
-circle(40, 50, 8, col = "white", border = NULL)
-circle(50, 60, 10, col = "red", border = NULL)
-circle(50, 60, 8, col = "white", border = NULL)
+circle(10, 60, 10, col = scales::alpha("white", 0.1), border = "blue", lwd = 8)
+circle(20, 50, 10, col = scales::alpha("white", 0.1), border = "yellow", lwd = 8)
+circle(30, 60, 10, col = scales::alpha("white", 0.1), border = "black", lwd = 8)
+circle(40, 50, 10, col = scales::alpha("white", 0.1), border = "green", lwd = 8)
+circle(50, 60, 10, col = scales::alpha("white", 0.1), border = "red", lwd = 8)
 ```
 
 ![plot of chunk unnamed-chunk-11](figure/unnamed-chunk-11.png) 

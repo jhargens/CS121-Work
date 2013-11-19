@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>Writing Functions Exercise </title>
+<title>Substitution Cypher</title>
 
 <style type="text/css">
 body, td {
@@ -178,125 +178,71 @@ hljs.initHighlightingOnLoad();
 </head>
 
 <body>
-<h1>Writing Functions Exercise </h1>
+<h2>Substitution Cypher</h2>
 
-<h2>Sums of Numbers</h2>
+<h3>Step One (The Key)</h3>
 
-<ol>
-<li>Counting Odds</li>
-</ol>
-
-<pre><code class="r">countOdds &lt;- function(x) {
-    +x%%2
-    +sum(x%%2)
-}
-</code></pre>
-
-<ol>
-<li>Counting Evens</li>
-</ol>
-
-<pre><code class="r">countEvens &lt;- function(x) {
-    +(x + 1)%%2
-    +sum(c((x + 1)%%2))
-}
-</code></pre>
-
-<h2>Triangles</h2>
-
-<ol>
-<li>Finding the Hypotenuse</li>
-</ol>
-
-<pre><code class="r">hypotenuselength &lt;- function(a, b) {
-    +(a^2)
-    +(b^2)
-    +sum(a^2, b^2)
-    +sqrt(sum(a^2, b^2))
-}
-</code></pre>
-
-<ol>
-<li>Law of Cosines </li>
-</ol>
-
-<pre><code class="r">lawofcosines &lt;- function(a, b, theta) {
-    +return(sqrt(a^2 + b^2 - 2 * a * b * cos(theta)))
-}
-</code></pre>
-
-<ol>
-<li>Length from Theta</li>
-</ol>
-
-<pre><code class="r">thetaFromLengths &lt;- function(a, b, c) {
-    acos((c^2 - a^2 - b^2)/(-2 * a * b))
+<pre><code class="r">mykey &lt;- function(word) {
+    key &lt;- unlist(strsplit(tolower(word), NULL))
+    result &lt;- character(0)
+    for (k in 1:length(key)) {
+        num &lt;- which(key[k] == letters)
+        result &lt;- c(result, num)
+    }
+    result &lt;- paste(result, collapse = &quot;&quot;)
+    return(as.numeric(result))
 }
 </code></pre>
 
 <p>Test Statement:</p>
 
-<pre><code class="r">thetaFromLengths(1, 2, 3)
+<pre><code class="r">mykey(&quot;hello&quot;)
 </code></pre>
 
-<pre><code>## [1] 3.142
+<pre><code>## [1] 85121215
 </code></pre>
 
-<ol>
-<li>Theta from Lengths Test</li>
-</ol>
+<h3>The Cypher</h3>
 
-<pre><code class="r">thetaFromLengthsTest &lt;- function(a, b, theta) {
-    thetaFromLengths(a, b, lawofcosines(a, b, theta)) - theta
+<pre><code class="r">encrypt &lt;- function(keyword, message) {
+    cSet &lt;- c(letters, LETTERS, &quot;.&quot;, &quot;,&quot;, &quot;?&quot;, &quot; &quot;, &quot;!&quot;, &quot;()&quot;)
+    set.seed(mykey(keyword))
+    code &lt;- sample(cSet)
+    open &lt;- paste(cSet, collapse = &quot;&quot;)
+    close &lt;- paste(code, collapse = &quot;&quot;)
+    telegram &lt;- chartr(open, close, message)
+    return(telegram)
 }
 </code></pre>
 
-<p>Test Statement: </p>
+<p>Test Statment: </p>
 
-<pre><code class="r">thetaFromLengthsTest(13, 84, 0)
+<pre><code class="r">encrypt(&quot;world&quot;, &quot;This means hello!&quot;)
 </code></pre>
 
-<pre><code>## [1] 0
+<pre><code>## [1] &quot;rSz!At?Pl!AS?..BV&quot;
 </code></pre>
 
-<h2>Graphics</h2>
+<h3>Decryption</h3>
 
-<ol>
-<li></li>
-</ol>
-
-<pre><code class="r">canvas &lt;- function(mn = 0, mx = 100) {
-    plot(1:2, ylim = c(mn, mx), xlim = c(mn, mx), asp = 1, xaxt = &quot;n&quot;, yaxt = &quot;n&quot;, 
-        type = &quot;n&quot;, bty = &quot;n&quot;, xlab = &quot;&quot;, ylab = &quot;&quot;)
-}
-
-circle &lt;- function(x, y, r, ...) {
-    angs &lt;- seq(0, 2 * pi, length = 100)
-    xpts &lt;- x + r * cos(angs)
-    ypts &lt;- y + r * sin(angs)
-    polygon(xpts, ypts, ...)
+<pre><code class="r">decrypt &lt;- function(keyword, message) {
+    cSet &lt;- c(letters, LETTERS, &quot;.&quot;, &quot;,&quot;, &quot;?&quot;, &quot; &quot;, &quot;!&quot;, &quot;()&quot;)
+    set.seed(mykey(keyword))
+    code &lt;- sample(cSet)
+    open &lt;- paste(cSet, collapse = &quot;&quot;)
+    close &lt;- paste(code, collapse = &quot;&quot;)
+    telegram &lt;- chartr(close, open, message)
+    return(telegram)
 }
 </code></pre>
 
-<p>Here&#39;s my graph:</p>
+<p>Test Statment:</p>
 
-<pre><code class="r">canvas()
-circle(50, 50, 20, col = rgb(1, 0, 0, 0.2))
+<pre><code class="r">decrypt(&quot;world&quot;, &quot;rSz!At?Pl!AS?..BV&quot;)
 </code></pre>
 
-<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-10"/> </p>
-
-<p>Olympic Rings:</p>
-
-<pre><code class="r">canvas()
-circle(10, 60, 10, col = scales::alpha(&quot;white&quot;, 0.1), border = &quot;blue&quot;, lwd = 8)
-circle(20, 50, 10, col = scales::alpha(&quot;white&quot;, 0.1), border = &quot;yellow&quot;, lwd = 8)
-circle(30, 60, 10, col = scales::alpha(&quot;white&quot;, 0.1), border = &quot;black&quot;, lwd = 8)
-circle(40, 50, 10, col = scales::alpha(&quot;white&quot;, 0.1), border = &quot;green&quot;, lwd = 8)
-circle(50, 60, 10, col = scales::alpha(&quot;white&quot;, 0.1), border = &quot;red&quot;, lwd = 8)
+<pre><code>## [1] &quot;This means hello!&quot;
 </code></pre>
-
-<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-11"/> </p>
 
 </body>
 

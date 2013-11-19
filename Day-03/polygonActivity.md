@@ -20,16 +20,13 @@ circle <- function(x, y, r, ry = r, ...) {
 ```r
 canvas()
 circle(50, 50, 20, col = "blue", border = NULL)
-circle(35, 70, r = 20, ry = 40, col = "pink", border = NULL)
+circle(35, 70, r = 20, ry = 40, col = scales::alpha("pink", 0.4), border = NULL)
 polygon(c(20, 40, 40, 20), c(40, 40, 60, 60), col = "green", border = "blue", 
     lwd = 5)
 polygon(c(38, 48, 48, 38), c(33, 33, 23, 23), col = "red", border = "black")
-polygon(c(67, 60, 75, 90, 83), c(45, 60, 72, 60, 45), col = "yellow", border = NULL)
+polygon(c(67, 60, 75, 90, 83), c(45, 60, 72, 60, 45), col = scales::alpha("yellow", 
+    0.6), border = NULL)
 ```
 
 ![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2.png) 
-
-```r
-
-```
 
