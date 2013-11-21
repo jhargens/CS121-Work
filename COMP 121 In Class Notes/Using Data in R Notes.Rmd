@@ -17,3 +17,9 @@ diacolors <- with(small, ifelse(diab==0, alpha("blue",.2),alpha("red",.4)))
 ```
 
 xyplot( wgt~hgt, data=small,group=sex, main="", auto.key=list(space="right"))
+
+### Dataframe Operators:
+1. mutate
+2. subset
+3. ddply
+4. join 

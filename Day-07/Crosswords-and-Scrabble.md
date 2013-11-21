@@ -32,3 +32,18 @@ Length2(words)
 ## [1] 85
 ```
 
+
+```r
+words[grep("^.b...$", words)]
+```
+
+```
+##  [1] "abaca" "abaci" "aback" "abaft" "abaka" "abamp" "abase" "abash"
+##  [9] "abate" "abbes" "abbey" "abbot" "abeam" "abele" "abets" "abhor"
+## [17] "abide" "abied" "abies" "abler" "ables" "abmho" "abode" "abohm"
+## [25] "aboil" "aboma" "aboon" "abort" "about" "above" "abris" "abuse"
+## [33] "abuts" "abuzz" "abyed" "abyes" "abysm" "abyss" "ebbed" "ebbet"
+## [41] "ebons" "ebony" "mbira" "obeah" "obeli" "obese" "obeys" "obias"
+## [49] "obits" "oboes" "obole" "oboli" "obols"
+```
+

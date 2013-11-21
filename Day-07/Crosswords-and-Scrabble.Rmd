@@ -18,3 +18,23 @@ Length2 <- function(x){
   }
 Length2(words)
 ``` 
+
+```{r}
+words[grep("^.b...$",words)]
+```
+```{r}
+makepattern <- function(length,...){
+  letters <- list(...)
+  str <- c("^",rep(".",length),"$")
+  for (k in 1:length(letters))
+    str[letters[[k]]+1] <- names(letters[k])
+  paste(str,collapse="")
+  }
+```
+
+### Final Product:
+```{r}
+Scrabblehelper <- function(length,...){
+  words[grep(makepattern(length,...),words)]
+  }
+```
