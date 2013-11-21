@@ -217,6 +217,27 @@ Length2(words)
 ## [49] &quot;obits&quot; &quot;oboes&quot; &quot;obole&quot; &quot;oboli&quot; &quot;obols&quot;
 </code></pre>
 
+<pre><code class="r">makepattern &lt;- function(length, ...) {
+    letters &lt;- list(...)
+    str &lt;- c(&quot;^&quot;, rep(&quot;.&quot;, length), &quot;$&quot;)
+    for (k in 1:length(letters)) str[letters[[k]] + 1] &lt;- names(letters[k])
+    paste(str, collapse = &quot;&quot;)
+}
+</code></pre>
+
+<h3>Final Product:</h3>
+
+<pre><code class="r">Scrabblehelper &lt;- function(length, ...) {
+    words[grep(makepattern(length, ...), words)]
+}
+</code></pre>
+
+<pre><code class="r">Scrabblehelper(length = 7, y = 3, f = 6)
+</code></pre>
+
+<pre><code>## [1] &quot;hayloft&quot; &quot;layoffs&quot; &quot;payoffs&quot;
+</code></pre>
+
 </body>
 
 </html>

@@ -38,3 +38,6 @@ Scrabblehelper <- function(length,...){
   words[grep(makepattern(length,...),words)]
   }
 ```
+```{r}
+Scrabblehelper(length=7,y=3,f=6)
+```

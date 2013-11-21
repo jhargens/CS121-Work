@@ -33,6 +33,7 @@ Length2(words)
 ```
 
 
+
 ```r
 words[grep("^.b...$", words)]
 ```
@@ -45,5 +46,33 @@ words[grep("^.b...$", words)]
 ## [33] "abuts" "abuzz" "abyed" "abyes" "abysm" "abyss" "ebbed" "ebbet"
 ## [41] "ebons" "ebony" "mbira" "obeah" "obeli" "obese" "obeys" "obias"
 ## [49] "obits" "oboes" "obole" "oboli" "obols"
+```
+
+
+```r
+makepattern <- function(length, ...) {
+    letters <- list(...)
+    str <- c("^", rep(".", length), "$")
+    for (k in 1:length(letters)) str[letters[[k]] + 1] <- names(letters[k])
+    paste(str, collapse = "")
+}
+```
+
+
+### Final Product:
+
+```r
+Scrabblehelper <- function(length, ...) {
+    words[grep(makepattern(length, ...), words)]
+}
+```
+
+
+```r
+Scrabblehelper(length = 7, y = 3, f = 6)
+```
+
+```
+## [1] "hayloft" "layoffs" "payoffs"
 ```
 
