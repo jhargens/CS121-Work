@@ -1,0 +1,5 @@
+## Minneapolis Mayor Ranked Choice Voting Algorithm 
+
+```{r}
+is.majority <- (votes) #will need name, number of votes, and total votes 
+whatpercentage(votes) # will need the name, number of voters, and pecentage of votes 

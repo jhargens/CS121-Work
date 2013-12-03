@@ -1,0 +1,13 @@
+## Review of Operators 
+
+### Summarize 
+1. nrow()
+2. ncol()
+3. head()
+4. names()
+### Transform 
+1. join
+2. when using data, fetchData 
+### Groups
+1. ddply()
+  a. example: ddply(both,~grade,summarize,length(grade))
