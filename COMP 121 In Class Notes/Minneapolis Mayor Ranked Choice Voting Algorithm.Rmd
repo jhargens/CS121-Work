@@ -1,5 +1,38 @@
 ## Minneapolis Mayor Ranked Choice Voting Algorithm 
 
+```{r cache=TRUE}
+votes <- fetchData("COMP121/MinneapolisMayor-2013.csv")
+```
+### Will Use Different Components
+#### Component 1: countvotes()
 ```{r}
-is.majority <- (votes) #will need name, number of votes, and total votes 
-whatpercentage(votes) # will need the name, number of voters, and pecentage of votes 
+table()
+ddply()
+["First"]
+order()
+sort()  
+```
+#### Component 2: whoWon()
+```{r}
+whoWon <- function(countVotes) {
+  mutate(countVotes, Percenage = / sum(Votes)) 
+  if (Percentage[1]>.5)
+    return[1] else{
+      return("NONE")
+    }
+  }
+```  
+#### Component 3: removeUndervote()
+```{r}
+overvote()
+candidate() 
+indexing
+which()
+First=="undervote"
+```
+#### Component 4: promoteChoice()
+```{r}
+chartr()
+indexing
+is.na
+```
