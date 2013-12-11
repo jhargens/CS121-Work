@@ -1,0 +1,21 @@
+### Final Exam
+```{r}
+require(mosaic)
+fetchData("COMP121/word-hints.R")
+letterProportion <- function(x){
+  splitup <- unlist(strsplit(x, NULL))
+  letters <- tolower(splitup)
+  lettertable <- table(letters)
+  proportion <- prop(~letters, data=lettertable) #need to get proportions for letters
+  return(proportion)
+  }
+```
+
+```{r}
+freqCompare <- function(proportion, Language){
+  chisq <- (frequency-)
+```
+
+```{r}
+whichLanguage <- function(x, frequency){
+  

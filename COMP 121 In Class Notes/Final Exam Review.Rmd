@@ -18,4 +18,6 @@ sumloop(1:5)
 
 ```{r}
 sumloop2 <- function(x){
-  
+  repeat{
+    
+  }
